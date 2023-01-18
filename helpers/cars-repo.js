@@ -18,12 +18,12 @@ function getById(id) {
     return cars.find(x => x.id.toString() === id.toString());
 }
 
-function create({ title, firstName, lastName, email, role, password }) {
-    const car = { title, firstName, lastName, email, role, password };
+function create({ title }) {
+    const car = { title };
 
     // validate
-    if (cars.find(x => x.email === car.email))
-        throw `Car with the email ${car.email} already exists`;
+    if (cars.find(x => x.title === car.title))
+        throw `Car with the title ${car.title} already exists`;
 
     // generate new car id
     car.id = cars.length ? Math.max(...cars.map(x => x.id)) + 1 : 1;
@@ -37,18 +37,13 @@ function create({ title, firstName, lastName, email, role, password }) {
     saveData();
 }
 
-function update(id, { title, firstName, lastName, email, role, password }) {
-    const params = { title, firstName, lastName, email, role, password };
+function update(id, { title }) {
+    const params = { title };
     const car = cars.find(x => x.id.toString() === id.toString());
 
     // validate
-    if (params.email !== car.email && cars.find(x => x.email === params.email))
-        throw `Car with the email ${params.email} already exists`;
-
-    // only update password if entered
-    if (!params.password) {
-        delete params.password;
-    }
+    if (params.title !== car.title && cars.find(x => x.title === params.title))
+        throw `Car with the title ${params.title} already exists`;
 
     // set date updated
     car.dateUpdated = new Date().toISOString();
