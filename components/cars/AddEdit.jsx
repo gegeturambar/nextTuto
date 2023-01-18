@@ -1,4 +1,4 @@
-import { carouter } from 'next/router';
+import { useRouter } from 'next/router';
 import { useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
@@ -12,7 +12,7 @@ export { AddEdit };
 function AddEdit(props) {
     const car = props?.car;
     const isAddMode = !car;
-    const router = carouter();
+    const router = useRouter();
     const [showPassword, setShowPassword] = useState(false);
     
     // form validation rules 
